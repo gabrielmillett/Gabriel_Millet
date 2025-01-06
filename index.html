@@ -173,18 +173,15 @@
               <a class="nav-link" href="#services" data-target="#services"><span>Services</span></a>
             </li>
         
+          
+            
+            <li class="nav-item">
+              <a class="nav-link" href="#contact" data-target="#contact"><span>Obtenir un devis & contact</span></a>
+            </li>
             <li class="nav-item">
               <a class="nav-link" href="#articles" data-target="#articles"><span>Articles</span></a>
             </li>
         
-            <li class="nav-item">
-              <a class="nav-link" href="#quote" data-target="#quote"><span>Obtenir un devis</span></a>
-            </li>
-            
-        
-            <li class="nav-item">
-              <a class="nav-link" href="#contact" data-target="#contact"><span>Contact</span></a>
-            </li>
           </ul>
         </div>
         
@@ -267,8 +264,7 @@
                   </li>
                 </ul>
               </div>
-
-              <div class="col-md-7">
+ <!--   <div class="col-md-7">
                 <h3>Formation</h3>
                 <ul class="ul-edu fa-ul">
                   <li>
@@ -296,15 +292,174 @@
                     </div>
                   </li>
                 </ul>
-              </div>
+              </div>-->
               
             </div>
           </div>
         </div>
       </div>
     </section>
+    
+<section id="statistics" class="stats-section" style="padding: 50px 0; background-color: #f9f9f9;">
+  <div class="container">
+    <h2 style="text-align: center; margin-bottom: 30px;">Quelques chiffres </h2>
+    <div style="display: flex; justify-content: center; gap: 50px; align-items: center; flex-wrap: wrap;">
+      <!-- Diagramme 1 : Missions -->
+      <div style="position: relative; width: 250px; height: 250px;">
+        <canvas id="missionsChart"></canvas>
+        <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); text-align: center;">
+          <h3 style="margin: 0; font-size: 2em; color: #28a745;">13</h3>
+          <p style="margin: 0; color: #6c757d;">Missions</p>
+        </div>
+      </div>
+
+      <!-- Diagramme 2 : Années d'expérience -->
+      <div style="position: relative; width: 250px; height: 250px;">
+        <canvas id="experienceChart"></canvas>
+        <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); text-align: center;">
+          <h3 style="margin: 0; font-size: 2em; color: #007bff;">3</h3>
+          <p style="margin: 0; color: #6c757d;">Ans d'expérience</p>
+        </div>
+      </div>
+
+      <!-- Diagramme 3 : Taux de satisfaction -->
+      <div style="position: relative; width: 250px; height: 250px;">
+        <canvas id="satisfactionChart"></canvas>
+        <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); text-align: center;">
+          <h3 style="margin: 0; font-size: 2em; color: #FFA500;">100%</h3>
+          <p style="margin: 0; color: #6c757d;">Taux de satisfaction</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<style>
+  .stats-section {
+    font-family: Arial, sans-serif;
+  }
+  h3 {
+    font-weight: bold;
+  }
+  p {
+    font-size: 1.2em;
+    color: #6c757d;
+  }
+</style>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+  // Diagramme pour "Missions effectuées"
+  const satisfactionChart = document.getElementById("satisfactionChart").getContext("2d");
+  new Chart(satisfactionChart, {
+    type: "doughnut",
+    data: {
+      labels: [], // Pas de labels pour éviter les données au survol
+      datasets: [
+        {
+          data: [13], // Uniquement la donnée principale
+          backgroundColor: ["#FFA500"],
+          borderColor: ["#ffffff"],
+          borderWidth: 4,
+        },
+      ],
+    },
+    options: {
+      cutout: "70%", // Ajoute l'espace au centre
+      responsive: true,
+      plugins: {
+        legend: {
+          display: false, // Pas de légende
+        },
+        tooltip: {
+          enabled: false, // Désactive les infobulles
+        },
+      },
+    },
+  });
+  const missionsCtx = document.getElementById("missionsChart").getContext("2d");
+  new Chart(missionsCtx, {
+    type: "doughnut",
+    data: {
+      labels: [], // Pas de labels pour éviter les données au survol
+      datasets: [
+        {
+          data: [13], // Uniquement la donnée principale
+          backgroundColor: ["#28a745"],
+          borderColor: ["#ffffff"],
+          borderWidth: 4,
+        },
+      ],
+    },
+    options: {
+      cutout: "70%", // Ajoute l'espace au centre
+      responsive: true,
+      plugins: {
+        legend: {
+          display: false, // Pas de légende
+        },
+        tooltip: {
+          enabled: false, // Désactive les infobulles
+        },
+      },
+    },
+  });
+
+  // Diagramme pour "Années d'expérience"
+  const experienceCtx = document.getElementById("experienceChart").getContext("2d");
+  new Chart(experienceCtx, {
+    type: "doughnut",
+    data: {
+      labels: [], // Pas de labels pour éviter les données au survol
+      datasets: [
+        {
+          data: [3], // Uniquement la donnée principale
+          backgroundColor: ["#007bff"],
+          borderColor: ["#ffffff"],
+          borderWidth: 4,
+        },
+      ],
+    },
+    options: {
+      cutout: "70%", // Ajoute l'espace au centre
+      responsive: true,
+      plugins: {
+        legend: {
+          display: false, // Pas de légende
+        },
+        tooltip: {
+          enabled: false, // Désactive les infobulles
+        },
+      },
+    },
+  });
+</script>
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  const toggles = document.querySelectorAll('.toggle-article');
+
+  toggles.forEach(toggle => {
+    toggle.addEventListener('click', function () {
+      const content = this.nextElementSibling;
+      const arrow = this.querySelector('.arrow');
+
+      // Basculer la visibilité du contenu
+      if (content.style.display === 'block') {
+        content.style.display = 'none';
+        arrow.style.transform = 'rotate(0deg)';
+      } else {
+        content.style.display = 'block';
+        arrow.style.transform = 'rotate(180deg)';
+      }
+    });
+  });
+});
+</script>
 <style>
   </style>
+  
     <section  id="experience" class="home-section wg-papers" style="padding: 40px 0 40px 0;">
       <div class="container">
         <div class="row">
@@ -326,7 +481,7 @@
                   </p>
                   <p class="date">2024 (5 mois)</p>
                 </div>
-                
+                <hr/>
               </li>
                 <div class="description">
                   <p class="title">Développeur Python freelance</p>
@@ -364,16 +519,7 @@
               
               <hr />
               
-              <hr />
-              <li>
-                <div class="description">
-                  <p class="title">Ouvrier agricole chez un viticulteur</p>
-                  <p class="details">
-                    <ul> <li>Participation aux travaux agricoles</li></ul></p>
-                  <p class="date">2021-2022 (été)</p>
-                </div>
-              </li>
-              <hr />
+            
             </ul>
           </div>
         </div>
@@ -442,85 +588,9 @@
         margin: 20px 0;
       }
     
- /* Style du carrousel */
- .carousel {
-   display: flex;
-   overflow: hidden;
-   width: 80%; /* Ajustez la largeur du carrousel selon vos besoins */
-   margin: 20px auto;
-   position: relative;
- }
- 
- .carousel-images {
-   display: flex;
-   transition: transform 0.3s ease; /* Transition fluide lors du déplacement */
- }
- 
- .carousel img {
-   max-width: 100%;
-   height: auto;
-   cursor: pointer;
- }
- 
- .carousel-button {
-   position: absolute;
-   top: 50%;
-   transform: translateY(-50%);
-   background-color: rgba(0, 0, 0, 0.5);
-   color: white;
-   border: none;
-   padding: 10px;
-   font-size: 20px;
-   cursor: pointer;
-   z-index: 10;
- }
- 
- .prev {
-   left: 0;
- }
- 
- .next {
-   right: 0;
- }
- 
- /* Style de la modal d'agrandissement */
- .modal {
-   display: none;
-   position: fixed;
-   z-index: 1;
-   left: 0;
-   top: 0;
-   width: 100%;
-   height: 100%;
-   background-color: rgba(0, 0, 0, 0.7);
-   justify-content: center;
-   align-items: center;
- }
- 
- .modal img {
-   max-width: 90%;
-   max-height: 90%;
-   object-fit: contain;
- }
- 
- .close {
-   position: absolute;
-   top: 10px;
-   right: 25px;
-   color: white;
-   font-size: 30px;
-   font-weight: bold;
-   cursor: pointer;
-   z-index: 100;
- }
- 
- .close:hover,
- .close:focus {
-   color: #ddd;
-   text-decoration: none;
-   cursor: pointer;
- }
-</style >
+    
+    </style>
+    
      
   
     <section id="services" class="home-section wg-blank" style="padding: 20px 0 20px 0">
@@ -543,65 +613,30 @@
               <li>Développement de bots pour l'extraction quotidienne de données</li>
               <li>Extraction de données depuis des sites de commerce en ligne, annuaires, plateformes professionnelles, et plus encore</li>
             </ul>
-           <!-- <div class="carousel" style="text-align: center; margin: 20px 0;">
-              <button class="carousel-button prev" onclick="moveSlide(-1)">&#10094;</button>
-              <div class="carousel-images">
-                <img src="images/services.png" alt="Service 1" class="carousel-image">
-                <img src="images/services2.png" alt="Service 2" class="carousel-image">
-                <img src="images/services3.png" alt="Service 3" class="carousel-image">
-              </div>
-              <button class="carousel-button next" onclick="moveSlide(1)">&#10095;</button>
-            </div>
-          --->
-            <div id="myModal" class="modal">
-              <span class="close" onclick="closeModal()">&times;</span>
-              <img id="modalImage" src="" alt="Image Agrandie">cv
+            <div class="w3-content w3-section" style="max-width:500px; margin:auto; margin-bottom:20px; height:300px; overflow:hidden;">
+              <img class="mySlides" src="data_scraping.png" style="width:100%; height:auto; max-height:100%; object-fit:cover;">
+              <img class="mySlides" src="image_scraping.png" style="width:100%; height:auto; max-height:100%; object-fit:cover;">
+              <img class="mySlides" src="images/services.png" style="width:100%; height:auto; max-height:100%; object-fit:cover;">
+              <img class="mySlides" src="images/services2.png" style="width:100%; height:auto; max-height:100%; object-fit:cover;">
             </div>
             
             <script>
-              let currentSlide = 0;
+            var myIndex = 0;
+            carousel();
             
-              const images = document.querySelectorAll('.carousel-image');
-              const modal = document.getElementById('myModal');
-              const modalImage = document.getElementById('modalImage');
-              const carouselImages = document.querySelector('.carousel-images');
-            
-              // Fonction pour naviguer dans le carrousel
-              function moveSlide(direction) {
-                currentSlide += direction;
-                if (currentSlide < 0) currentSlide = images.length - 1;
-                if (currentSlide >= images.length) currentSlide = 0;
-                
-                const newTransform = `translateX(-${currentSlide * 100}%)`;
-                carouselImages.style.transform = newTransform;
+            function carousel() {
+              var i;
+              var x = document.getElementsByClassName("mySlides");
+              for (i = 0; i < x.length; i++) {
+                x[i].style.display = "none";  
               }
-            
-              // Fonction pour ouvrir l'image en mode agrandissement
-              function openModal(imgSrc) {
-                modal.style.display = "flex";
-                modalImage.src = imgSrc;
-              }
-            
-              // Fonction pour fermer la modal
-              function closeModal() {
-                modal.style.display = "none";
-              }
-            
-              // Événements de clic sur les images pour les agrandir
-              images.forEach(img => {
-                img.addEventListener('click', () => {
-                  openModal(img.src);
-                });
-              });
-            
-              // Fermer la modal quand on clique à l'extérieur de l'image
-              window.addEventListener('click', (event) => {
-                if (event.target === modal) {
-                  closeModal();
-                }
-              });
+              myIndex++;
+              if (myIndex > x.length) {myIndex = 1}    
+              x[myIndex-1].style.display = "block";  
+              setTimeout(carousel, 2000); // Change image every 2 seconds
+            }
             </script>
-            
+          
             <!-- Web Development Services -->
             <h2>Développement de sites web</h2>
             <p>Je propose également des services de développement web pour créer des sites modernes, fonctionnels et adaptés à vos besoins. Que ce soit pour un site vitrine, un blog ou un site e-commerce, je m'assure de la performance et de la facilité d'utilisation du site.</p>
@@ -621,85 +656,295 @@
       </div>
     </section>
     
-    <section
-      id="awards"
-      class="home-section wg-blank"
-      style="padding: 20px 0 20px 0"
-    >
+    <section id="contact" class="home-section wg-blank" style="padding: 40px 0;">
       <div class="container">
         <div class="row">
           <div class="col-lg-12">
-            <h1>Awards &amp; Honors</h1>
-            <ul>
-              <li>
-                <b>PhD Dissertation Award</b>, School of Computing, KAIST, 2022
-              </li>
-              -
-              <i>Title: Statistical Program Dependence Approximation </i>
-              <li><b>Naver Ph.D. Fellowship Award</b>, NAVER Corp., 2021</li>
-              -
-              <i
-                >Awarded by NAVER Corp. to Ph.D. candidates who have published
-                an outstanding research paper or have excellent publication
-                performance.</i
-              >
-              <li>
-                <b>Government-sponsored Scholarship</b>, Ministry of Science and
-                ICT of Korea, 2016 - 2022
-              </li>
-              <li>
-                <b>Government-sponsored Scholarship</b>, Ministry of Science and
-                ICT of Korea, 2012 - 2016
-              </li>
-            </ul>
+            <style>
+              .highlight {
+                font-size: 24px;
+                font-weight: bold;
+                color: #007bff;
+              }
+              .typed-cursor {
+                font-weight: bold;
+                color: #000;
+              }
+            </style>
+          </head>
+          <body>
+            <div class="pl-2 row">
+              <div class="highlight">
+                <span id="animated-text"></span>
+              </div>
+            </div>
+          
+            <!-- Inclure Typed.js -->
+            <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
+            <script>
+              // Initialiser Typed.js
+              const options = {
+                strings: ["Obtenez les informations clés pour dominer votre marché.",
+  "Transformez la veille stratégique en un véritable avantage concurrentiel.",
+  "Automatisez la collecte de vos données en un clic !",
+  "Découvrez ce que vos concurrents ne veulent pas que vous sachiez.",
+  "Créez une base de données à jour et complète.",
+  "Simplifiez votre processus d'extraction de données dès aujourd'hui !",
+  "Boostez votre stratégie grâce à des données fiables et instantanées.",
+  "Votre temps est précieux : laissez-nous automatiser la collecte pour vous.",
+  "Des données précises et actualisées, quand vous en avez besoin."
+], 
+  typeSpeed: 50, // Diminuez pour augmenter la vitesse
+  backSpeed: 20, // Diminuez pour accélérer l'effacemen
+                loop: true, // Répétition infinie
+                cursorChar: "|", // Style du curseur
+                backDelay: 1000, // Temps avant l'effacement
+              };
+          
+              // Lier à l'élément HTML
+              new Typed("#animated-text", options);
+            </script>
+            
+            <h1>Obtenir votre devis</h1>
+            <form id="contactForm" action="https://formspree.io/f/mgvvpaza" method="POST">
+              <!-- Champ Email -->
+              <div class="form-group">
+                <label for="email">Votre Email</label>
+                <input type="email" id="email" name="email" class="form-control" placeholder="Entrez votre email" required>
+              </div>
+    
+              <!-- Raison du contact -->
+              <div class="form-group">
+                <label for="reason">Votre demande concerne...</label>
+                <textarea id="reason" name="reason" class="form-control" rows="2" placeholder="Spécifiez la raison de votre demande" required></textarea>
+              </div>
+    
+              <!-- Zone de Message -->
+              <div class="form-group">
+                <label for="message">Votre Message</label>
+                <textarea id="message" name="message" class="form-control" rows="5" placeholder="Écrivez votre message ici" required></textarea>
+              </div>
+    
+              <!-- Bouton Envoyer -->
+              <button type="submit" class="btn btn-primary">Envoyer</button>
+            </form>
           </div>
         </div>
       </div>
     </section>
-
-    <section
-      id="teaching"
-      class="home-section wg-blank"
-      style="padding: 20px 0 20px 0"
-    >
+    
+        
+    <section id="articles" class="home-section wg-blank" style="padding: 20px 0;">
       <div class="container">
         <div class="row">
-          <div class="col-lg-12" style="line-height: 180% !important">
-            <h1>Teaching Experiences</h1>
-            <ul>
-              <li>
-                Teaching Assistant, Automated Software Testing (CS453), School
-                of Computing, KAIST, <i>Spring 2019</i>
-              </li>
-              <li>
-                Teaching Assistant, Artificial Intelligence Based Software
-                Engineering (CS454), School of Computing, KAIST,
-                <i>Fall 2018</i>
-              </li>
-              <li>
-                Teaching Assistant, Introduction to Logic for Computer Science
-                (CS402), School of Computing, KAIST, <i>Spring 2018</i>
-              </li>
-              <li>
-                Teaching Assistant, Artificial Intelligence Based Software
-                Engineering (CS454), School of Computing, KAIST,
-                <i>Fall 2017</i>
-              </li>
-              <li>
-                Teaching Assistant, Introduction to Logic for Computer Science
-                (CS402), School of Computing, KAIST, <i>Spring 2017</i>
-              </li>
-              <li>
-                Teaching Assistant, Special Topics in Computer Science ⟨Search
-                Based Software Engineering⟩ (CS492), School of Computing, KAIST,
-                <i>Fall 2016</i>
-              </li>
-            </ul>
+          <div class="col-lg-12" style="line-height: 180% !important;">
+            <h1>Articles</h1>
+            <div class="article">
+              <h2 class="toggle-article">
+                Qu'est-ce que le Web Scraping ?
+                <span class="arrow">▼</span>
+              </h2>
+              <div class="article-content">
+                
+                <p>
+                  Le <strong>web scraping</strong>, également connu sous le nom
+                  d'extraction de données web, est une technique permettant de
+                  collecter des informations depuis des sites web de manière
+                  automatisée. Contrairement à une navigation manuelle, le web scraping utilise des scripts ou des outils automatisés pour extraire rapidement de grandes quantités de données structurées ou non structurées.
+                </p>
+                <h3>Comment fonctionne le Web Scraping ?</h3>
+                <p>Le processus de web scraping repose sur plusieurs étapes :</p>
+                <ul>
+                  <li><strong>Identification</strong> : Identifier les pages web contenant les données d'intérêt.</li>
+                  <li><strong>Extraction</strong> : Utiliser des outils (comme Python avec <code>BeautifulSoup</code> ou <code>Scrapy</code>) pour récupérer le contenu HTML des pages.</li>
+                  <li><strong>Analyse</strong> : Filtrer les informations nécessaires en exploitant les balises HTML ou d'autres structures de données.</li>
+                  <li><strong>Stockage</strong> : Enregistrer les données dans un format exploitable, tel que CSV, JSON ou une base de données.</li>
+                </ul>
+                <div class="article-image-container">
+                                    <img src="article_1.jpg" alt="Illustration Web Scraping" class="article-image" />
+                </div>
+                <h3>Cas d'utilisation du Web Scraping</h3>
+                <p>Le web scraping peut être utilisé dans de nombreux domaines, notamment :</p>
+                <ul>
+                  <li><strong>Veille concurrentielle</strong> : Suivre les prix des produits et services pour analyser la concurrence.</li>
+                  <li><strong>Études de marché</strong> : Collecter des données pour comprendre les tendances et comportements des consommateurs.</li>
+                  <li><strong>Recherche académique</strong> : Extraire des données pour des études ou des analyses approfondies.</li>
+                  <li><strong>Agrégation de contenu</strong> : Rassembler des informations provenant de multiples sources pour créer des plateformes d'actualités ou d'avis.</li>
+                  <li><strong>Analyse financière</strong> : Suivre les cours des actions, les indicateurs économiques et les rapports financiers.</li>
+                </ul>
+              </div>
+              
+            </div>
+            <div class="article">
+              <h2 class="toggle-article">
+                Les défis et limitations du Web Scraping
+                <span class="arrow">▼</span>
+              </h2>
+              <div class="article-content">
+                <h3>Les défis techniques</h3>
+                <p>Le web scraping peut être confronté à plusieurs obstacles techniques :</p>
+                <ul>
+                  <li><strong>Sites dynamiques</strong> : Les sites utilisant JavaScript nécessitent des outils avancés comme Selenium ou Puppeteer.</li>
+                  <li><strong>Captcha et protections anti-scraping</strong> : Les sites mettent en place des mécanismes pour bloquer les robots.</li>
+                  <li><strong>Structure des pages instable</strong> : Les changements fréquents dans le HTML des sites peuvent briser les scripts de scraping.</li>
+                  <li><strong>Volume de données</strong> : Gérer de grandes quantités de données peut être difficile sans infrastructure appropriée.</li>
+                </ul>
+                <div class="article-image-container">
+                  <img src="captcha.png" alt="Illustration captach" class="article-image" />
+</div>
+               
+                <h3>Les défis éthiques</h3>
+                <p>Pour un scraping responsable :</p>
+                <ul>
+                  <li><strong>Respect des données privées</strong> : Évitez de scraper des informations sensibles ou personnelles.</li>
+                  <li><strong>Impact sur les serveurs</strong> : Limitez les requêtes pour ne pas perturber les sites web.</li>
+                </ul>
+                <div class="article-image-container">
+                  <img src="info_perso.jpg" alt="Illustration information personnelles" class="article-image" />
+</div>
+                <h3>Comment surmonter ces défis ?</h3>
+                <p>Voici quelques solutions pour aborder ces limitations :</p>
+                <ul>
+                  <li><strong>Utiliser des proxies</strong> pour contourner les limitations d'accès.</li>
+                  <li><strong>Mettre à jour les scripts</strong> régulièrement pour suivre les évolutions des sites.</li>
+                  <li><strong>Préférer les API</strong> officielles quand elles sont disponibles pour une solution légale et stable.</li>
+                </ul>
+              </div>
           </div>
+          <div class="article">
+            <h2 class="toggle-article">
+              Comment choisir le bon outil de Web Scraping pour vos besoins
+              <span class="arrow">▼</span>
+            </h2>
+            <div class="article-content">
+              <h3>Pourquoi est-il important de choisir le bon outil ?</h3>
+              <p>Le choix d'un outil de web scraping adapté est crucial pour garantir une extraction de données efficace et sans encombre. Cela dépend de vos besoins, de la complexité des sites, et de votre budget.</p>
+          
+              <h3>Types d'outils de web scraping</h3>
+              <ul>
+                <li><strong>Outils sans code</strong> : Idéaux pour les non-techniciens, comme <strong>Octoparse</strong> ou <strong>ParseHub</strong>.</li>
+                <li><strong>Services cloud</strong> : Plateformes prêtes à l'emploi pour des projets de grande échelle, comme <strong>Apify</strong> ou <strong>Zyte</strong>.</li>
+                <li><strong>API officielles</strong> : Une solution légale et fiable, idéale pour récupérer des données structurées sans effort.</li>
+              </ul>
+          
+             
+          
+              <h3>Comparatif des outils et mes services</h3>
+              <p>Il existe de nombreuses plateformes et bibliothèques pour le web scraping, chacune adaptée à des besoins spécifiques. Si vous avez du mal à choisir ou à mettre en place votre projet, je peux vous accompagner :</p>
+              <ul>
+                <li>Analyse de vos besoins pour recommander les meilleurs outils.</li>
+                <li>Développement de solutions sur mesure.</li>
+                <li>Optimisation des scripts et gestion des données.</li>
+              </ul>
+              <div class="contact-container">
+                <p>Contactez-moi pour un devis ou des conseils :</p>
+                <a href="https://www.malt.fr/profile/gabrielmillet" target="_blank" class="btn btn-primary">Me contacter sur Malt</a>
+                <a href="#contact" class="btn btn-secondary">Envoyez-moi un message</a>
+              </div>
+          
+              <h3>Étapes pour valider un outil</h3>
+              <ul>
+                <li><strong>Tester plusieurs outils</strong> : Comparez leur facilité d'utilisation et leur efficacité.</li>
+                <li><strong>Évaluer vos besoins</strong> : Sites simples ou dynamiques, volume de données, budget.</li>
+                <li><strong>Privilégier des solutions stables</strong> : Envisagez des outils ou services éprouvés.</li>
+              </ul>
+          
+             
+            </div>
+          </div>
+          
+          <style>
+            .contact-container {
+              margin: 20px 0;
+              text-align: center;
+            }
+            .contact-container .btn {
+              display: inline-block;
+              margin: 5px;
+              padding: 10px 20px;
+              text-decoration: none;
+              color: white;
+              border-radius: 5px;
+              box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            }
+            .btn-primary {
+              background-color: #007bff;
+            }
+            .btn-primary:hover {
+              background-color: #0056b3;
+            }
+            .btn-secondary {
+    background-color: #28a745; /* Beau vert */
+    color: white; /* Contraste pour une bonne lisibilité */
+  }
+  .btn-secondary:hover {
+    background-color: #218838; /* Vert plus sombre au survol */
+  }
+          </style>
+          
         </div>
       </div>
     </section>
+    <style>
+      /* Styles pour l'article */
+      .article-content {
+        padding: 15px;
+        background-color: #f9f9f9;
+        border-radius: 10px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        margin-top: 20px;
+      }
+      
+      .article-image-container {
+        display: flex;            /* Utilise Flexbox */
+        justify-content: center;  /* Centre horizontalement */
+        align-items: center;      /* Centre verticalement si nécessaire */
+        margin-bottom: 15px;
+      }
+      
+      .article-image {
+        max-width: 30%;
+        height: auto;
+        border-radius: 10px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      }
+      </style>
+    
+<style>
+/* Styles pour l'accordéon */
+.toggle-article {
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 1.5rem;
+  background-color: #f9f9f9;
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #ddd;
+}
 
+.toggle-article:hover {
+  background-color: #e9e9e9;
+}
+
+.arrow {
+  font-size: 1rem;
+  transition: transform 0.3s;
+}
+
+.article-content {
+  display: none;
+  margin-top: 10px;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  background-color: #fdfdfd;
+  line-height: 1.6;
+}
+</style>
+
+  
     <!-- <section id="scholarships" class="home-section wg-blank   " style="padding: 20px 0 20px 0;">
     <div class="container">
 
